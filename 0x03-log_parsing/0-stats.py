@@ -24,8 +24,7 @@ def print_stats():
     """Prints the collected metrics."""
     print(f"File size: {total_size}")
     for code in sorted(status_counts.keys()):
-        if code in valid_status_codes:
-            print(f"{code}: {status_counts[code]}")
+        print(f"{code}: {status_counts[code]}")
 
 
 def signal_handler(sig, frame):
