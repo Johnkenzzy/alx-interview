@@ -23,8 +23,9 @@ log_pattern = re.compile(r'''
 def print_stats():
     """Prints the collected metrics."""
     print(f"File size: {total_size}")
-    for code in sorted(status_counts.keys()):
-        print(f"{code}: {status_counts[code]}")
+    for code in sorted(valid_status_codes):
+        if code in status_counts:
+            print(f"{code}: {status_counts[code]}")
 
 
 def signal_handler(sig, frame):
