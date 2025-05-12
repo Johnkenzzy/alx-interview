@@ -51,6 +51,7 @@ try:
             line_count += 1
             if line_count % 10 == 0:
                 print_stats()
-except KeyboardInterrupt:
+except Exception:
+    pass
+finally:
     print_stats()
-    raise
