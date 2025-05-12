@@ -10,13 +10,13 @@ status_counts = {}
 valid_status_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
 line_count = 0
 log_pattern = re.compile(r'''
-    ^                                   # Start of line
-    (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) # IP address
-    \s-\s                               # " - " separator
-    \[[^\]]+\]                          # [date]
-    \s"GET\s/projects/260\sHTTP/1\.1"   # "GET /projects/260 HTTP/1.1"
-    \s(\d{3})                           # Status code
-    \s(\d+)$                            # File size
+    ^                                       # Start of line
+    (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})    # IP address
+    \s-\s                                   # " - " separator
+    \[[^\]]+\]                              # [date]
+    \s"GET\s/projects/260\sHTTP/1\.1"       # "GET /projects/260 HTTP/1.1"
+    \s(\d{3})                               # Status code
+    \s(\d+)$                                # File size
 ''', re.VERBOSE)
 
 
