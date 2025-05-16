@@ -10,21 +10,21 @@ status_counts = {}
 valid_status_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
 line_count = 0
 log_pattern = re.compile(r'''
-    ^                                   # Start of line
-    (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) # IP address
-    \s-\s                               # " - " separator
-    \[[^\]]+\]                          # [date]
-    \s"GET\s/projects/260\sHTTP/1\.1"   # "GET /projects/260 HTTP/1.1"
-    \s(\d{3})                           # Status code
-    \s(\d+)$                            # File size
+    ^                                       # Start of line
+    (\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})    # IP address
+    \s-\s                                   # " - " separator
+    \[[^\]]+\]                              # [date]
+    \s"GET\s/projects/260\sHTTP/1\.1"       # "GET /projects/260 HTTP/1.1"
+    \s(\d{3})                               # Status code
+    \s(\d+)$                                # File size
 ''', re.VERBOSE)
 
 
 def print_stats():
     """Prints the collected metrics."""
     print(f"File size: {total_size}")
-    for code in sorted(status_counts.keys()):
-        if code in valid_status_codes:
+    for code in sorted(valid_status_codes):
+        if code in status_counts:
             print(f"{code}: {status_counts[code]}")
 
 
@@ -51,7 +51,8 @@ try:
             line_count += 1
             if line_count % 10 == 0:
                 print_stats()
-except Exception:
-    pass
+except KeyboardInterrupt:
+    print_stats()
+    sys.exit(0)
 finally:
     print_stats()
